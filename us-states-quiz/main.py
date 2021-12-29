@@ -56,10 +56,16 @@ while game_on:
         if row["state"] == answer_state:
             set_name_and_pont(x=row["x"], y=row["y"])
 
-    #Get coordinates from the row
-    #Set answer_state name to the coordinates location with turtle
-
-
+    #Win check
+    if correct == 50:
+        text = turtle.Turtle()
+        text.hideturtle()
+        text.color("#000")
+        text.penup()
+        text.goto(x=0, y=0)
+        text.write("YOU WON!", move=False, font=("arial", 50, "bold"), align="center")
+        text.pendown()
+        game_on = False
 
 turtle.mainloop()
 # screen.exitonclick()
