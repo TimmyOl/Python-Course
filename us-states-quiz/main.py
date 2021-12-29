@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import turtle
+import pandas
 
 screen = turtle.Screen()
 screen.title("U.S. States Quiz")
@@ -21,11 +22,44 @@ screen.addshape(background_image)
 
 turtle.shape(background_image)
 
-def get_mouse_click_coor(x, y):
-    print(x, y)
+correct = 0
 
-turtle.onscreenclick(get_mouse_click_coor)
+game_on = True
+
+def set_name_and_pont(x, y):
+    """Print the name on the state on the map and give 1 point for correct answer
+
+    Args:
+        x (int): x coordinate on the map
+        y (int): y coordinate on the map
+    """
+    global correct
+    global answer_state
+    correct += 1
+    text = turtle.Turtle()
+    text.hideturtle()
+    text.color("#000")
+    text.penup()
+    text.goto(x=x, y=y)
+    text.write(answer_state, move=False, font=("arial", 12, "normal"), align="center")
+    text.pendown()
+
+while game_on:
+    #Create a textbox for guessing
+    answer_state = screen.textinput(title=f"{correct}/50, Guess the state", prompt="What's another states name?")
+
+    #Load states from csv
+    states = pandas.read_csv("./50_states.csv")
+
+    #Find answer_state in states data frame if it exists
+    for idx, row in states.iterrows():
+        if row["state"] == answer_state:
+            set_name_and_pont(x=row["x"], y=row["y"])
+
+    #Get coordinates from the row
+    #Set answer_state name to the coordinates location with turtle
+
+
 
 turtle.mainloop()
-
 # screen.exitonclick()
