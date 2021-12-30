@@ -50,6 +50,11 @@ while game_on:
     #Create a textbox for guessing
     answer_state = screen.textinput(title=f"{len(guessed_states)}/50, Guess the state", prompt="What's another states name?").capitalize()
 
+    if answer_state == "Exit":
+        game_on = False
+        turtle.bye()
+        break
+
     #Load states from csv
     states = pandas.read_csv("./50_states.csv")
 
@@ -70,4 +75,3 @@ while game_on:
         game_on = False
 
 turtle.mainloop()
-# screen.exitonclick()
