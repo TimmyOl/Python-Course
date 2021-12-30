@@ -22,7 +22,6 @@ screen.addshape(background_image)
 
 turtle.shape(background_image)
 
-correct = 0
 guessed_states = []
 
 game_on = True
@@ -38,7 +37,6 @@ def set_name_and_pont(x, y):
     global answer_state
     global guessed_states
     if answer_state not in guessed_states:
-        correct += 1
         guessed_states.append(answer_state)
         text = turtle.Turtle()
         text.hideturtle()
@@ -50,7 +48,7 @@ def set_name_and_pont(x, y):
 
 while game_on:
     #Create a textbox for guessing
-    answer_state = screen.textinput(title=f"{correct}/50, Guess the state", prompt="What's another states name?")
+    answer_state = screen.textinput(title=f"{len(guessed_states)}/50, Guess the state", prompt="What's another states name?")
 
     #Load states from csv
     states = pandas.read_csv("./50_states.csv")
@@ -61,7 +59,7 @@ while game_on:
             set_name_and_pont(x=row["x"], y=row["y"])
 
     #Win check
-    if correct == 50:
+    if len(guessed_states) == 50:
         text = turtle.Turtle()
         text.hideturtle()
         text.color("#000")
