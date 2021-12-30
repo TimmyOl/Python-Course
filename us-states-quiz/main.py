@@ -23,10 +23,14 @@ screen.addshape(background_image)
 turtle.shape(background_image)
 
 guessed_states = []
+missed_states = []
 
 game_on = True
 
-def set_name_and_pont(x, y):
+#Load states from csv
+states = pandas.read_csv("./50_states.csv")
+
+def set_name_and_point(x, y):
     """Print the name on the state on the map and give 1 point for correct answer
 
     Args:
@@ -47,21 +51,30 @@ def set_name_and_pont(x, y):
         text.pendown()
 
 while game_on:
+
     #Create a textbox for guessing
     answer_state = screen.textinput(title=f"{len(guessed_states)}/50, Guess the state", prompt="What's another states name?").capitalize()
 
     if answer_state == "Exit":
+        #Add Make a csv "missed_states.csv" with the states not entered
+        #Append the missed states to the missed_states array
+        for idx, row in states.iterrows():
+            if row["state"] not in guessed_states:
+                missed_states.append(row["state"])
+        #Make a DataFrame with the missed_states array
+        missed_states_dict = {'Missed States': missed_states}
+        missed_states_df = pandas.DataFrame(missed_states_dict)
+        #Print the missed_states DataFrame to a new csv file
+        missed_states_df.to_csv("./missed_states.csv")
+
         game_on = False
         turtle.bye()
         break
 
-    #Load states from csv
-    states = pandas.read_csv("./50_states.csv")
-
     #Find answer_state in states data frame if it exists
     for idx, row in states.iterrows():
         if row["state"] == answer_state:
-            set_name_and_pont(x=row["x"], y=row["y"])
+            set_name_and_point(x=row["x"], y=row["y"])
 
     #Win check
     if len(guessed_states) == 50:
