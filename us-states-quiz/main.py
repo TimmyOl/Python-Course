@@ -48,7 +48,7 @@ def set_name_and_pont(x, y):
 
 while game_on:
     #Create a textbox for guessing
-    answer_state = screen.textinput(title=f"{len(guessed_states)}/50, Guess the state", prompt="What's another states name?")
+    answer_state = screen.textinput(title=f"{len(guessed_states)}/50, Guess the state", prompt="What's another states name?").capitalize()
 
     #Load states from csv
     states = pandas.read_csv("./50_states.csv")
