@@ -1,14 +1,27 @@
-# Copyright 2021 Timmy Olsson
-# 
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-# 
-#     http://www.apache.org/licenses/LICENSE-2.0
-# 
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+student_dict = {
+    "student": ["Angela", "James", "Lily"], 
+    "score": [56, 76, 98]
+}
+
+#Looping through dictionaries:
+for (key, value) in student_dict.items():
+    #Access key and value
+    pass
+
+import pandas
+student_data_frame = pandas.DataFrame(student_dict)
+
+#Loop through rows of a data frame
+for (index, row) in student_data_frame.iterrows():
+    #Access index and row
+    #Access row.student or row.score
+    pass
+
+# Keyword Method with iterrows()
+# {new_key:new_value for (index, row) in df.iterrows()}
+
+#TODO 1. Create a dictionary in this format:
+{"A": "Alfa", "B": "Bravo"}
+
+#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
 
